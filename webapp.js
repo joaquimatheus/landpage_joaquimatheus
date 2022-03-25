@@ -2,15 +2,19 @@ require('./dotenv')
 process.env.TZ = 'UTC'
 
 const express = require('express');
+const fs = require('fs');
 const app = express();
+const path = require('path');
 
-app.get('/', (req, res) => {
-  res.send('Hello World')
-})
+const htmls = {
+  index: fs.readFileSync(path.resolve(__dirname, 'public/index.html'))
+}
 
-app.get('/join/:email', (req, res) => {
-  const { email } = req.params;
-})
+app.use(express.static('./public/'))
+
+app.get('/index', (req, res) => { res.end(htmls.index) })
+app.get('/index.html', (req, res) => { res.end(htmls.index) })
+app.get('/', (req, res) => { res.end(htmls.index) })
 
 app.listen(process.env.HTTP_PORT, () => {
   console.log('Is running ya')
