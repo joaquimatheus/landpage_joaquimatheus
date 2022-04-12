@@ -1,7 +1,7 @@
 require('./dotenv');
 
 module.exports = {
-    client: 'pg';
+    client: 'pg'
     connection: {
         host: process.env.PSQL_HOST,
         user: process.env.PSQL_USER,
