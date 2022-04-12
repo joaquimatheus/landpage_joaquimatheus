@@ -1,18 +1,12 @@
 require('./dotenv');
 
 module.exports = {
-  client: 'pg',
-  version: '13.6',
-  connection: {
-    host : process.env.PSQL_DB_HOST,
-    user : process.env.PSQL_DB_USERNAME,
-    password : process.env.PSQL_DB_PASSWORD,
-    database : process.env.PSQL_DB_DATABASE,
-  },
-  pool: { min: 0, max: 10 },
-
-  migrations: {
-    tableName: 'knex_migrations'
-  }
+    client: 'pg';
+    connection: {
+        host: process.env.PSQL_HOST,
+        user: process.env.PSQL_USER,
+        database: process.env.PSQL_DATABASE,
+        password: process.env.PSQL_PASSWORD
+    },
+    pool: { min: 2, max: 10 }
 };
-
