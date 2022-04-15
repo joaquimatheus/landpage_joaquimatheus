@@ -25,9 +25,9 @@ links.forEach((link, i) => {
 function getInputsForm() {
     domqs('.contact-form').addEventListener('submit', (ev) => {
         const email = domqs('#email').value.replace(/\s/g, '').slice(0, 200);
-        const name = domqs('#name').value.replace(/\s/g, '').slice(0, 32);
-        const msg = domqs('#msg').value.replace(/\s/g, '').slice(0, 500);
-        console.log(email, name, msg);
+        const name = domqs('#name').value.slice(0, 32);
+        const msg = domqs('#msg').value.slice(0, 500);
+        console.log(msg, name, email);
     })
 }
 
