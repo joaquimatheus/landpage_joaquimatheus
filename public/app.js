@@ -28,6 +28,22 @@ function getInputsForm() {
         const name = domqs('#name').value.slice(0, 32);
         const msg = domqs('#msg').value.slice(0, 500);
         console.log(msg, name, email);
+
+        const data = {
+            email: email,
+            name: name,
+            msg: msg
+        }
+        
+        const request = new Request("/contact", {
+            method: 'POST',
+            body: data,
+            headers: new Headers()
+        })
+
+        console.log(request)
+
+        fetch(request)
     })
 }
 
