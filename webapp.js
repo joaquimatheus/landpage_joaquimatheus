@@ -16,6 +16,11 @@ app.get('/index', (req, res) => { res.end(htmls.index) })
 app.get('/index.html', (req, res) => { res.end(htmls.index) })
 app.get('/', (req, res) => { res.end(htmls.index) })
 
+app.get('/send/:name-:msg-:email'), (req, res) => {
+    const { name, msg, email } = req.params;
+    console.log(`${name}, ${email}, ${msg} `)
+}
+
 app.listen(process.env.HTTP_PORT, () => {
   console.log('Is running ya')
 })
