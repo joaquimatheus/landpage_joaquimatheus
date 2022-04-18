@@ -24,26 +24,27 @@ links.forEach((link, i) => {
 
 function getInputsForm() {
     domqs('.contact-form').addEventListener('submit', (ev) => {
+        ev.preventDefault()
         const email = domqs('#email').value.replace(/\s/g, '').slice(0, 200);
         const name = domqs('#name').value.slice(0, 32);
         const msg = domqs('#msg').value.slice(0, 500);
-        console.log(msg, name, email);
 
         const data = {
             email: email,
             name: name,
             msg: msg
         }
-        
-        const request = new Request("/contact", {
-            method: 'POST',
-            body: data,
-            headers: new Headers()
+
+        fetch("/contact", {
+            headers: {
+                "Accept": "application/json",
+                "Content-type": "application/json"
+                },
+            method: "POST",
+            body: JSON.stringify(data)
         })
-
-        console.log(request)
-
-        fetch(request)
+        .then((res) => {console.log(res)})
+        .catch((res) => {console.log(res)});
     })
 }
 
