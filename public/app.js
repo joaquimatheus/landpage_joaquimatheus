@@ -1,3 +1,7 @@
+function domqs(selector) {
+    return document.querySelector(selector);
+}
+
 const links = document.querySelectorAll('.link');
 const sections = document.querySelectorAll('section');
 
@@ -17,3 +21,31 @@ links.forEach((link, i) => {
     }
   })
 })
+
+function getInputsForm() {
+    domqs('.contact-form').addEventListener('submit', (ev) => {
+        ev.preventDefault()
+        const email = domqs('#email').value.replace(/\s/g, '').slice(0, 200);
+        const name = domqs('#name').value.slice(0, 32);
+        const msg = domqs('#msg').value.slice(0, 500);
+
+        const data = {
+            email: email,
+            name: name,
+            msg: msg
+        }
+
+        fetch("/contact", {
+            headers: {
+                "Accept": "application/json",
+                "Content-type": "application/json"
+                },
+            method: "POST",
+            body: JSON.stringify(data)
+        })
+        .then((res) => {console.log(res)})
+        .catch((res) => {console.log(res)});
+    })
+}
+
+getInputsForm();
