@@ -6,6 +6,7 @@ exports.up = function(knex) {
                 CONSTRAINT pk_users PRIMARY KEY DEFAULT NEXTVAL('seq_users'),
 
             name TEXT NOT NULL,
+            subject VARCHAR(100) NOT NULL,
             email TEXT NOT NULL,
             msg TEXT NOT NULL,
 
