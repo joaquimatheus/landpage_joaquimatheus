@@ -10,6 +10,8 @@ const bodyParser = require('body-parser');
 const environment = process.env.ENVRONMENT || 'development';
 const knex = require('knex')(require('./knexfile')[environment]);
 
+const { sendEmail } = require('./email');
+
 const htmls = {
   index: fs.readFileSync(path.resolve(__dirname, 'public/index.html'))
 }
@@ -37,7 +39,13 @@ app.post('/contact', async(req, res) => {
         console.error(ex)
         res.status(500).end('foi mal, mas algo deu errado. :/')
     }
-})
+
+    try {
+        await sendEmail(email, subject, name, msg);
+    } catch (ex) {
+        console.error(ex);
+    }
+});
 
 app.listen(process.env.HTTP_PORT, () => {
   console.log('Is running ya')
