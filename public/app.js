@@ -2,8 +2,7 @@ function domqs(selector) {
     return document.querySelector(selector);
 }
 
-const links = document.querySelectorAll('.link');
-const sections = document.querySelectorAll('section');
+const links = document.querySelectorAll('.link'); const sections = document.querySelectorAll('section');
 
 let activeLink = 0;
 
@@ -26,13 +25,15 @@ function getInputsForm() {
     domqs('.contact-form').addEventListener('submit', (ev) => {
         ev.preventDefault()
         const email = domqs('#email').value.replace(/\s/g, '').slice(0, 200);
-        const name = domqs('#name').value.slice(0, 32);
+        const name = domqs('#name').value.slice(0, 80);
         const msg = domqs('#msg').value.slice(0, 500);
+        const subject = domqs('#subject').value.slice(0, 100);
 
         const data = {
             email: email,
             name: name,
-            msg: msg
+            msg: msg,
+            subject: subject
         }
 
         fetch("/contact", {
