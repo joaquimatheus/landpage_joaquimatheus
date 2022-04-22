@@ -7,6 +7,9 @@ const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
 
+const environment = process.env.ENVRONMENT || 'development';
+const knex = require('knex')(require('./knexfile')[environment]);
+
 const htmls = {
   index: fs.readFileSync(path.resolve(__dirname, 'public/index.html'))
 }
@@ -24,9 +27,15 @@ app.post('/contact', async(req, res) => {
     const userAgent = headers['user-agent'];
     const { email, name, msg } = req.body
 
-    console.log(email, name, msg);
-    console.log(headers);
-    console.log(userAgent);
+    try {
+        const sendUser = await knex('users').insert({
+            name: name, 
+            email: email, 
+            msg: msg});
+    } catch (ex) {
+        console.error(ex)
+        res.status(500).end('foi mal, mas algo deu errado. :/')
+    }
 })
 
 app.listen(process.env.HTTP_PORT, () => {
