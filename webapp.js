@@ -25,13 +25,14 @@ app.use(bodyParser.json())
 app.post('/contact', async(req, res) => {
     const { headers } = req
     const userAgent = headers['user-agent'];
-    const { email, name, msg } = req.body
+    const { email, name, msg, subject } = req.body
 
     try {
         const sendUser = await knex('users').insert({
             name: name, 
             email: email, 
-            msg: msg});
+            msg: msg,
+            subject: subject});
     } catch (ex) {
         console.error(ex)
         res.status(500).end('foi mal, mas algo deu errado. :/')
