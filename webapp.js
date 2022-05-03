@@ -13,7 +13,8 @@ const knex = require('knex')(require('./knexfile')[environment]);
 const { sendEmail } = require('./email');
 
 const htmls = {
-  index: fs.readFileSync(path.resolve(__dirname, 'public/index.html'))
+    index: fs.readFileSync(path.resolve(__dirname, 'public/index.html')),
+    errEmail: fs.readFileSync(path.resolve(__dirname, 'public/emailError.html')) 
 }
 
 app.use(express.static('./public/'))
@@ -21,13 +22,23 @@ app.use(express.static('./public/'))
 app.get('/index', (req, res) => { res.end(htmls.index) })
 app.get('/index.html', (req, res) => { res.end(htmls.index) })
 app.get('/', (req, res) => { res.end(htmls.index) })
+app.get('/mailerror', (req, res) => {res.end(htmls.errEmail)})
 
 app.use(bodyParser.json())
 
+const sendFormDataByIp = {}
 app.post('/contact', async(req, res) => {
-    const { headers } = req
+    const { ip, headers } = req
     const userAgent = headers['user-agent'];
     const { email, name, msg, subject } = req.body
+
+    if (!sendFormDataByIp[ip]) { sendFormDataByIp[ip] = 0 };
+
+    sendFormDataByIp[ip]++;
+    console.log(sendFormDataByIp);
+    if (sendFormDataByIp[ip] > 5) {
+        return res.status(500).redirect('mailerror');
+    };
 
     try {
         const sendUser = await knex('users').insert({
