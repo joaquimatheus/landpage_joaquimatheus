@@ -76,8 +76,4 @@ function activeLinks() {
 window.onload = function() {
     activeLinks();
     getInputsForm();
-
-    if ( Response.redirected ) {
-        return window.location.url = Response.url
-    }
 }
