@@ -1,6 +1,5 @@
 const fs = require('fs');
 const filePath = 'ips-watched.json'
-console.log(filePath);
 
 function saveMaliciousIPs(email, ip, userAgent) {
     const template = {email: email, ip: ip, userAgent}
