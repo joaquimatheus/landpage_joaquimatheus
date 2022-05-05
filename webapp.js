@@ -11,6 +11,7 @@ const environment = process.env.ENVRONMENT || 'development';
 const knex = require('knex')(require('./knexfile')[environment]);
 
 const { sendEmail } = require('./email');
+const { saveMaliciousIPs } = require('./watches');
 
 const htmls = {
     index: fs.readFileSync(path.resolve(__dirname, 'public/index.html')),
@@ -37,6 +38,7 @@ app.post('/contact', async(req, res) => {
     sendFormDataByIp[ip]++;
     console.log(sendFormDataByIp);
     if (sendFormDataByIp[ip] > 5) {
+        await saveMaliciousIPs(email, ip, userAgent);
         return res.status(500).redirect('mailerror');
     };
 
