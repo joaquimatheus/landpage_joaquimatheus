@@ -37,7 +37,11 @@ function getInputsForm() {
                 method: "POST",
                 body: JSON.stringify(data)
             })
-            .then((res) => {console.log(res)})
+            .then((res) => {
+                if (res.redirected) {
+                    return window.location.href = res.url
+                }
+            })
             .catch((res) => {console.log(res)});
     })
 }
