@@ -50,6 +50,10 @@ app.get('/', (req, res) => {
     res.end(htmls.index) ;
 });
 
+app.get('/cv', (req, res) => {
+    res.download('cv/cv_joaquimatheus.pdf', 'cv_joaquimatheus.pdf');
+})
+
 app.get('/mailerror', (req, res) => {res.end(htmls.errEmail)})
 
 const sendFormDataByIp = {}
