@@ -1,11 +1,12 @@
-require('./dotenv')
-process.env.TZ = 'UTC'
+require('./dotenv');
+process.env.TZ = 'UTC';
 
 const express = require('express');
 const fs = require('fs');
 const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
+const logger = require('./logger');
 
 const environment = process.env.ENVRONMENT || 'development';
 const knex = require('knex')(require('./knexfile')[environment]);
@@ -18,14 +19,38 @@ const htmls = {
     errEmail: fs.readFileSync(path.resolve(__dirname, 'public/emailError.html')) 
 }
 
-app.use(express.static('./public/'))
+app.enable('trust proxy', 1);
 
-app.get('/index', (req, res) => { res.end(htmls.index) })
-app.get('/index.html', (req, res) => { res.end(htmls.index) })
-app.get('/', (req, res) => { res.end(htmls.index) })
-app.get('/mailerror', (req, res) => {res.end(htmls.errEmail)})
+app.use((req, res, next) => {
+    const { ip, method, url } = req;
 
+    const id = new Date().getTime();
+    const msg = `[${ip}] {${method}} ${id} - Start: ${url}`;
+
+    logger.info(msg);
+    res.on('finish', () => { logger.logResponse(req, res, id, 'Finish'); });
+    res.on('close', () => { logger.logResponse(req, res, id, 'Close'); });
+
+    next();
+})
+
+
+app.use(express.static('./public/', {index: false}))
 app.use(bodyParser.json())
+
+app.get('/index', (req, res) => { 
+    res.end(htmls.index) 
+});
+
+app.get('/index.html', (req, res) => { 
+    res.end(htmls.index) 
+});
+
+app.get('/', (req, res) => { 
+    res.end(htmls.index) ;
+});
+
+app.get('/mailerror', (req, res) => {res.end(htmls.errEmail)})
 
 const sendFormDataByIp = {}
 app.post('/contact', async(req, res) => {
@@ -38,7 +63,14 @@ app.post('/contact', async(req, res) => {
     sendFormDataByIp[ip]++;
     console.log(sendFormDataByIp);
     if (sendFormDataByIp[ip] > 5) {
-        await saveMaliciousIPs(email, ip, userAgent);
+        const msg = `${ip} - ${email} - ${userAgent}`
+        try {
+            await saveMaliciousIPs(email, ip, userAgent);
+            logger.info(`Saved malicious ip: ${msg} `);
+        } catch (err) {
+            logger.error(err);
+        }; 
+        logger.info(`This ip(${ip} was redirected)`)
         return res.status(500).redirect('mailerror');
     };
 
@@ -47,18 +79,36 @@ app.post('/contact', async(req, res) => {
             name: name, 
             email: email, 
             msg: msg,
-            subject: subject});
-    } catch (ex) {
-        console.error(ex)
-        res.status(500).end('foi mal, mas algo deu errado. :/')
+            subject: subject
+        });
+        console.log('pass')
+        logger.info(`Saving email on database: ${email} - ${name} `,'SavingMail')
+    } catch (err) {
+        logger.error(err);
     }
 
     try {
         await sendEmail(email, subject, name, msg);
-    } catch (ex) {
-        console.error(ex);
+        logger.info(`Sending email: ${email} - ${name} `, 'Sending Mail');
+    } catch (err) {
+        res.status(500).end('foi mal, mas algo deu errado. :/');
+        logger.error(err);
     }
 });
+
+const _get = app.get;
+const _post = app.post;
+
+app.post = function(route) {
+    logger.info(`Online route: {POST} ${route}`);
+    return _post.apply(this, arguments);
+}
+
+app.post = function(route) {
+    logger.info(`Online route: {GET} ${route}`);
+    return _get.apply(this, arguments);
+}
+
 
 app.listen(process.env.HTTP_PORT, () => {
   console.log('Is running ya')
