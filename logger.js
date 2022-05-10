@@ -23,7 +23,7 @@ function formatError(error) {
         errorData.inner = formatError(error.inner);
     }
 
-    return erroData;
+    return errorData;
 }
 
 function info(msg, context) {
