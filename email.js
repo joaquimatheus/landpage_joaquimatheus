@@ -11,7 +11,7 @@ async function sendEmail(from, subject, name, msg) {
             pass: process.env.AWS_SES_PASSWORD
         }
     });
-
+    
     let info = await transporter.sendMail({
         from: from,
         to: 'matheus@joaquimatheus.site',
@@ -21,7 +21,5 @@ async function sendEmail(from, subject, name, msg) {
 
     console.log('Message ID', info.messageId);
 }
-
-sendEmail().catch(console.error);
 
 module.exports = { sendEmail };
