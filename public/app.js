@@ -19,8 +19,6 @@ function getInputsForm() {
             return isValid;
         };
 
-        console.log('pass', email);
-
         const data = {
             email: email,
             name: name,
