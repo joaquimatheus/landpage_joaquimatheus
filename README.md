@@ -1,9 +1,8 @@
 ### This is a Landpage of joaquimatheus.site
 
 before of start, you need to install the packages for the project
-Si run this command
 
-
+So run this command
 ``` shell
 $ yarn install
 ```
