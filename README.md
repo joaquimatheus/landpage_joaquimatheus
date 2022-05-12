@@ -123,7 +123,7 @@ Connect the database that was created
 postgres#~ psql -U yourUserName -h localhost -d yourNameDatabase
 ```
 
-Options
+Options:
 - **-U** database username
 - **-h** database server host
 - **-d** database name to connect
@@ -169,7 +169,7 @@ This app uses SMTP Server if you want to switch to the other service it will
 work too
 
 1. Open you editor in `email.js` and config the email 
-```
+``` javascript
 async function sendEmail(from, subject, name, msg) {
     const transporter = nodemailer.createTransport({
         host: process.env.AWS_SES_HOST,
@@ -194,6 +194,12 @@ async function sendEmail(from, subject, name, msg) {
 }
 ```
 
+2. Is donee!
+To start the App use this
+``` bash
+$ yarn dev
+```
+In the `"script"` in the `packages.json` is using **nodemon** package forever you save the code restart the app
 
 
 You can use this repo for anything, i don't care about copyrights just do it 
