@@ -129,16 +129,72 @@ Options
 - **-d** database name to connect
 
 Then you will write the password of the user that you will connect
-After you entered 
 
+After you entered run this command on psql
 ``` bash
 psql$ \dt
 ```
+Will show like this
 | Schema | Name                 | Type   | Owner        |
 | :--    |    :-------:         |  :--:  |       -----: |
 | public | knex_migrations      | table  | yourUserName |
 | public | knex_migrations_lock | table  | yourUserName |
 | public | users                | table  | yourUserName |
+
+To see the user's columns
+``` bash
+psql$ \dt users
+```
+
+Will show like this
+
+| id | subject | email | msg | utc_created_on |
+| :- | :-----: | :---: | :-: |      --------: | 
+
+Ok now the app can be used, but it will not send emails because of that always
+you submit in the formulary the data will print in the terminal 'error sending
+emails' why the app has a logger module.
+
+If you want configure the emails sender *fellow below*, if not just skip
+
+In the `.env`
+
+``` bash
+AWS_SES_USER='youUserSES'
+AWS_SES_PASSWORD='youPassSES'
+AWS_SES_HOST='youHostSES'
+```
+
+This app uses SMTP Server if you want to switch to the other service it will
+work too
+
+1. Open you editor in `email.js` and config the email 
+```
+async function sendEmail(from, subject, name, msg) {
+    const transporter = nodemailer.createTransport({
+        host: process.env.AWS_SES_HOST,
+        port: 587,
+        secure: false,
+        authL {
+            user: process.env.AWS_SES_USER,
+            pass: process.env.AWS_SES_PASSWORD
+        }
+    });
+    // You don't need to change it if you are using SES
+    // If you are using other port just change it
+
+    let info = await transporter.sendEmail({
+        from: from,
+        to: 'yourEmailAdressa',
+        subject: `${name}: ${subject}`,
+        text: msg
+    })
+
+    // In yourEmailAdress put your email
+}
+```
+
+
 
 You can use this repo for anything, i don't care about copyrights just do it 
 
