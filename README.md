@@ -186,11 +186,14 @@ Will show like this
 
 To see the user's columns
 ``` bash
-psql$ \dt users
+psql$ \d users
+```
+Or 
+```
+psql$ SELECT * FROM users;
 ```
 
 Will show like this
-
 | id | subject | email | msg | utc_created_on |
 | :- | :-----: | :---: | :-: |      --------: | 
 
