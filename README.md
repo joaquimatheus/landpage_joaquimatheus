@@ -52,17 +52,27 @@ you can choose any name for your database and user
 
 Create a new database
 ``` bash
-$ CREATE DATABASE yourNameDatabase;
+psql$ CREATE DATABASE yourNameDatabase;
 ```
 
 Create a new user
-```
-$ CREATE USER yourUserName WITH EMCRYPTED PASSWORD 'yourPassword';
+``` bash
+psql$ CREATE USER yourUserName WITH EMCRYPTED PASSWORD 'yourPassword';
 ```
 
 Grant privileges for the *yourUserName* to *yourNameDatabase*
+``` bash
+psql$ GRANT ALL PRIVILEGES ON DATABASE yourNameDatabase TO yourUserName WITH GRANT OPTION;
 ```
-$ GRANT ALL PRIVILEGES ON DATABASE yourNameDatabase TO yourUserName WITH GRANT OPTION;
+
+To exit
+``` bash
+psql$ \q
+```
+
+Return to your default user
+``` bash
+$ su yourUser
 ```
 
 This commands had a lot other options you can view following the links below
@@ -101,7 +111,33 @@ console.log(pgHost);
 ```
 [Knex](http://knexjs.org/) is SQL [query builder](https://docs.devart.com/studio-for-mysql/building-queries-with-query-builder/query-builder-overview.html) and we are goint to use [migrations](https://en.wikipedia.org/wiki/Schema_migration) to management the schemas on database
 
-3. You need run this command using the knex to create the tables and columns
+3. You can view the knex config in `knexfile.js`
+``` javascript
+require('./dotenv');
+// Is loading the env variables
+
+module.exports = {
+    development: {
+        client: 'pg',
+        connection: {
+            host : process.env.PSQL_DB_HOST,
+            database : process.env.PSQL_DB_DATABASE,
+            user: process.env.PSQL_DB_USERNAME,
+            password : process.env.PSQL_DB_PASSWORD
+        },
+        migrations: {
+            directory: __dirname + '/knex/migrations',
+            tableName: "knex_migrations"
+        },
+        pool : {
+            min: 2,
+            max: 10
+        }
+    }
+}
+```
+
+4. You need run this command using the knex to create the tables and columns
 ``` bash
 $ yarn knex migrate:up
 ```
