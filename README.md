@@ -37,7 +37,7 @@ $ su postgres
 
 And run it
 ``` bash
-$ psql
+postgres#~ psql
 ```
 
 Psql is a terminal-based fron-end to Postgres. It enables you to type in
