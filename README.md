@@ -7,7 +7,7 @@ So run this command
 $ yarn install
 ```
 
-Now you need to install a Postgres database because this app uses Postgres to 
+Now you need to install a Postgres database because this App uses Postgres to 
 save the form values.
 
 You can install Postgres using the official website of Postgres or using the 
@@ -81,8 +81,8 @@ This commands had a lot other options you can view following the links below
 - [CREATE USER](https://www.postgresql.org/docs/14/sql-createuser.html)
 - [GRANT](https://www.postgresql.org/docs/current/sql-grant.html)
 
-You need set the environment variables to connect the database in the **app**.
-This app uses *dotenv* for this
+You need set the environment variables to connect the database in the **App**.
+This App uses *dotenv* for this
 
 **Attention!**
 > you should never commit your .env variables if this happens anyone can view your
@@ -109,7 +109,7 @@ PSQL_DB_USERNAME='yourUserNmae'
 PSQL_DB_PASSWORD='yourPassword'
 ```
 
-- This app uses [dotenv package](https://www.npmjs.com/package/dotenv) to loads environment variables in `.env` and to access this variable you do this.
+- This App uses [dotenv package](https://www.npmjs.com/package/dotenv) to loads environment variables in `.env` and to access this variable you do this.
 - `dontenv.js` is a file that loads all environment variables and it's more simples import this file in other files. 
 - You can view this file how config the *dontenv*
 
@@ -208,9 +208,9 @@ Will show like this
 | id | name |  subject | email | msg | utc_created_on |
 | :- | :--: | :------: | :---: | :-: |     ---------: | 
 
-Ok now the app can be used, but it will not send emails because of that always
+Ok now the App can be used, but it will not send emails because of that always
 you submit in the formulary the data will print in the terminal 'error sending
-emails' why the app has a logger module.
+emails' why the App has a logger module.
 
 ---
 
@@ -223,7 +223,7 @@ AWS_SES_PASSWORD='youPassSES'
 AWS_SES_HOST='youHostSES'
 ```
 
-This app uses SMTP Server if you want to switch to the other service it will
+This App uses SMTP Server if you want to switch to the other service it will
 work too.
 
 1. Open you editor in `email.js` and config the email 
@@ -261,7 +261,7 @@ $ yarn dev
 
 In the `package.json` in `"scripts": "dev": "npx nodemon webapp.js"`, nodemon is a package that always restarts the App when you saves
 
-The app is running in port 7000, you can change it in `.env`
+The App is running in port 7000, you can change it in `.env`
 Example:
 ``` env
 HTTP_PORT=1337
