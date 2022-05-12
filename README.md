@@ -37,7 +37,7 @@ $ su postgres
 
 And run it
 ``` bash
-postgres#~ psql
+postgres$ psql
 ```
 
 Psql is a terminal-based fron-end to Postgres. It enables you to type in
@@ -71,7 +71,8 @@ psql$ \q
 
 Return to your default user
 ``` bash
-$ su yourUser
+postgres$ exit 
+root$ su yourUser
 ```
 
 This commands had a lot other options you can view following the links below
@@ -81,7 +82,7 @@ This commands had a lot other options you can view following the links below
 - [GRANT](https://www.postgresql.org/docs/current/sql-grant.html)
 
 You need set the environment variables to connect the database in the **app**.
-This app uses *dontenv* for this
+This app uses *dotenv* for this
 
 **Attention!**
 > you should never commit your .env variables if this happens anyone can view your
@@ -173,7 +174,7 @@ $ yarn knex
 
 Go back to *user postgres* and connect the database that was created
 ``` bash
-postgres#~ psql -U yourUserName -h localhost -d yourNameDatabase
+postgres$ psql -U yourUserName -h localhost -d yourNameDatabase
 ```
 
 Options:
@@ -204,8 +205,8 @@ psql$ SELECT * FROM users;
 ```
 
 Will show like this
-| id | subject | email | msg | utc_created_on |
-| :- | :-----: | :---: | :-: |      --------: | 
+| id | name |  subject | email | msg | utc_created_on |
+| :- | :--: | :------: | :---: | :-: |     ---------: | 
 
 Ok now the app can be used, but it will not send emails because of that always
 you submit in the formulary the data will print in the terminal 'error sending
