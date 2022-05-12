@@ -48,7 +48,7 @@ documentation about [psql](https://www.postgresql.org/docs/current/app-psql.html
 Now you are inside of **psql shell** you will run theses commands to create databaase, a
 user and give privileges for this user. *Follow below*
 
-you can choose any name for your database and user
+You can choose any name for your database and user
 
 Create a new database
 ``` bash
@@ -140,11 +140,11 @@ module.exports = {
 - **development:** is environment and the knex can load a lot of different environments configuration
 - **client:** is which database that you are using in the project
 - **connection:** is the client to create the connection
-- **migrations:** the **directory** is where that migrations file is saved and the tableName is where knexfile saves the migrations on database
+- **migrations:** the **directory** is where that migrations file is saved and the **tableName** is where knexfile saves the migrations on database
 - **pool:** polling uses a cache of database connections instead of opening and closing connections for every request so this reduce overhead and network latency, **min** and **max** connections.
+- The table and columns is saved `knex/migrations/20220413225245_form_contact.js` it 
 
-
-4. You need run this command using the knex to create the tables and columns
+4. You need to run this command using the knex to create the tables and columns
 ``` bash
 $ yarn knex migrate:up
 ```
@@ -154,12 +154,12 @@ If you want the drop the tables
 $ yarn knex migrate:down
 ```
 
-If you want see all options of knex
+If you want to see all options of knex
 ``` bash
 $ yarn knex
 ```
 
-4. Now we need to check if the tables and columns is really created
+5. Now we need to check if the tables and columns is really created
 
 Connect the database that was created
 ``` bash
@@ -198,10 +198,11 @@ Ok now the app can be used, but it will not send emails because of that always
 you submit in the formulary the data will print in the terminal 'error sending
 emails' why the app has a logger module.
 
+---
+
 If you want configure the emails sender *fellow below*, if not just skip
 
 In the `.env`
-
 ``` bash
 AWS_SES_USER='youUserSES'
 AWS_SES_PASSWORD='youPassSES'
@@ -209,7 +210,7 @@ AWS_SES_HOST='youHostSES'
 ```
 
 This app uses SMTP Server if you want to switch to the other service it will
-work too
+work too.
 
 1. Open you editor in `email.js` and config the email 
 ``` javascript
@@ -242,7 +243,7 @@ To start the App use this
 ``` bash
 $ yarn dev
 ```
-In the `"script"` in the `packages.json` is using **nodemon** package forever you save the code restart the app
+In the "script" and in the
 
 
 You can use this repo for anything, i don't care about copyrights just do it 
