@@ -130,12 +130,19 @@ module.exports = {
             tableName: "knex_migrations"
         },
         pool : {
-            min: 2,
+            min: 0,
             max: 10
         }
     }
 }
 ```
+- Knexfile generally contains all of the configurations for your database
+- **development:** is environment and the knex can load a lot of different environments configuration
+- **client:** is which database that you are using in the project
+- **connection:** is the client to create the connection
+- **migrations:** the **directory** is where that migrations file is saved and the tableName is where knexfile saves the migrations on database
+- **pool:** polling uses a cache of database connections instead of opening and closing connections for every request so this reduce overhead and network latency, **min** and **max** connections.
+
 
 4. You need run this command using the knex to create the tables and columns
 ``` bash
