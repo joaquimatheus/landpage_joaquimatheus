@@ -84,13 +84,13 @@ You need set the environment variables to connect the database in the **app**.
 This app uses *dontenv* for this
 
 **Attention!**
-you should never commit your .env variables if this happens anyone can view your
-.env variables in your git repository. Your .env variables have user, password,
-host, and name of the database and other sensitive things then anyone can hack
-your database and other things have in .env
+> you should never commit your .env variables if this happens anyone can view your
+> .env variables in your git repository. Your .env variables have user, password,
+> host, and name of the database and other sensitive things then anyone can hack
+> your database and other things have in .env
 
-If you commit the .env file you should delete all commits ahead that have .env
-because these commits wil have the .env file
+> If you commit the .env file you should delete all commits ahead that have .env
+> because these commits wil have the .env file
 
 The malicious person can just open that one commit that has a .env file
 
