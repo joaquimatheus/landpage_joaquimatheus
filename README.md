@@ -25,7 +25,6 @@ When you have installed the Postgres you will run these commands;
 but before you will need to switch for the postgres user in Linux Distros
 has a lot of ways to do that, I will show the easy way to do this.
 
-
 Enter the root user
 ``` bash
 $ sudo su
@@ -83,6 +82,17 @@ This commands had a lot other options you can view following the links below
 
 You need set the environment variables to connect the database in the **app**.
 This app uses *dontenv* for this
+
+**Attention!**
+you should never commit your .env variables if this happens anyone can view your
+.env variables in your git repository. Your .env variables have user, password,
+host, and name of the database and other sensitive things then anyone can hack
+your database and other things have in .env
+
+If you commit the .env file you should delete all commits ahead that have .env
+because these commits wil have the .env file
+
+The malicious person can just open that one commit that has a .env file
 
 1. Rename .env-sample to .env
 ``` bash
@@ -232,7 +242,7 @@ async function sendEmail(from, subject, name, msg) {
 
     let info = await transporter.sendEmail({
         from: from,
-        to: 'yourEmailAdressa',
+        to: 'yourEmailAddress',
         subject: `${name}: ${subject}`,
         text: msg
     })
