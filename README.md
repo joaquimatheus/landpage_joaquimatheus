@@ -161,7 +161,7 @@ $ yarn knex
 
 5. Now we need to check if the tables and columns is really created
 
-Connect the database that was created
+Go back to *user postgres* and connect the database that was created
 ``` bash
 postgres#~ psql -U yourUserName -h localhost -d yourNameDatabase
 ```
@@ -243,11 +243,18 @@ async function sendEmail(from, subject, name, msg) {
 
 2. Is donee!
 To start the App use this
+
 ``` bash
 $ yarn dev
 ```
-In the "script" and in the
 
+In the `package.json` in `"scripts": "dev": "npx nodemon webapp.js"`, nodemon is a package that always restarts the App when you saves
+
+The app is running in port 7000, you can change it in `.env`
+Example:
+``` env
+HTTP_PORT=1337
+```
 
 You can use this repo for anything, i don't care about copyrights just do it 
 
