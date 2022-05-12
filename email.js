@@ -18,8 +18,6 @@ async function sendEmail(from, subject, name, msg) {
         subject: `${name}: ${subject}`,
         text: msg
     })
-
-    console.log('Message ID', info.messageId);
 }
 
 module.exports = { sendEmail };
