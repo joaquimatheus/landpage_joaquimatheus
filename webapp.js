@@ -14,9 +14,13 @@ const knex = require('knex')(require('./knexfile')[environment]);
 const { sendEmail } = require('./email');
 const { saveMaliciousIPs } = require('./watches');
 
+function getUiFiles(pathtofile) {
+    return fs.readFileSync(path.resolve(__dirname, `public/${pathtofile}`))
+}
+
 const htmls = {
-    index: fs.readFileSync(path.resolve(__dirname, 'public/index.html')),
-    errEmail: fs.readFileSync(path.resolve(__dirname, 'public/emailError.html')) 
+    index: getUiFiles('index.html'),
+    errEmail: getUiFiles('emailError.html')
 }
 
 app.enable('trust proxy', 1);
@@ -113,7 +117,6 @@ app.post = function(route) {
     return _get.apply(this, arguments);
 }
 
-
 app.listen(process.env.HTTP_PORT, () => {
-  console.log('Is running ya')
+  console.log(`Is running ya in port in ${process.env.HTTP_PORT}`)
 })
