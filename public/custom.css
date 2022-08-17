@@ -2,12 +2,14 @@
     padding: 20vh 0;
 }
 
-#linkedin {
-    width: 10%;
-    height: 10%;
-    margin-left: 5px;
+#my-self {
+    border-radius: 100%;
 }
 
-#my-self{
-    border-radius: 100%;
+a {
+    text-decoration: none;
+}
+
+#medias a > img {
+    width: 40px;
 }
