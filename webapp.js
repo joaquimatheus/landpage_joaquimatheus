@@ -20,7 +20,8 @@ function getUiFiles(pathtofile) {
 
 const htmls = {
     index: getUiFiles('index.html'),
-    errEmail: getUiFiles('emailError.html')
+    errEmail: getUiFiles('emailError.html'),
+    about: getUiFiles('about.html')
 }
 
 app.enable('trust proxy', 1);
@@ -53,6 +54,10 @@ app.get('/index.html', (req, res) => {
 app.get('/', (req, res) => { 
     res.end(htmls.index) ;
 });
+
+app.get('/about', (req, res) => {
+    res.end(htmls.about);
+})
 
 app.get('/cv', (req, res) => {
     res.download('cv/cv_joaquimatheus.pdf', 'cv_joaquimatheus.pdf');
