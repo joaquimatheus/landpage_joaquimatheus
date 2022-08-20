@@ -1,0 +1,92 @@
+#intro {
+    padding: 10vh 0;
+}
+
+#about {
+    padding-top: 20vh 0;
+}
+
+#my-self {
+    border-radius: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+#medias a > img {
+    width: 40px;
+}
+
+li {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+ul {
+    list-style-type: none;
+    list-style-position: inside;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+#sql {
+    background-color: black;
+}
+
+#css {
+    background-color: #264DE4;
+}
+
+#rest {
+    background-color: #3E48CD;
+}
+
+#flexbox {
+    background-color: #6960F7;
+}
+
+#bootstrap {
+    background-color: #7011F5;
+}
+
+#grid {
+    background-color: #F08E26;
+}
+
+#postgres {
+    background-color: #31648C;
+}
+
+.mysql-my {
+    background-color: #1D4A65
+}
+
+.mysql-sql {
+    background-color: #DE8A00;
+}
+
+#docker {
+    background-color: #0997E5;
+}
+
+#virtualbox {
+    background-color: #27436A;
+}
+
+#aws {
+    background-color: #222E3D;
+    color: #F69400;
+}
+
+#lean-ux {
+    background-color: #F00558;
+}
+
+#agile-ux {
+    background-color: #AAC1CC;
+}
+
+#product-bs {
+    background-color: #3D5A80;
+}
