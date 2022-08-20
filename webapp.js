@@ -20,7 +20,6 @@ function getUiFiles(pathtofile) {
 
 const htmls = {
     index: getUiFiles('index.html'),
-    errEmail: getUiFiles('emailError.html'),
     about: getUiFiles('about.html'),
     projects: getUiFiles('projects.html')
 }
