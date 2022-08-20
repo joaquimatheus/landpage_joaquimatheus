@@ -21,7 +21,8 @@ function getUiFiles(pathtofile) {
 const htmls = {
     index: getUiFiles('index.html'),
     errEmail: getUiFiles('emailError.html'),
-    about: getUiFiles('about.html')
+    about: getUiFiles('about.html'),
+    projects: getUiFiles('projects.html')
 }
 
 app.enable('trust proxy', 1);
@@ -57,6 +58,10 @@ app.get('/', (req, res) => {
 
 app.get('/about', (req, res) => {
     res.end(htmls.about);
+})
+
+app.get('/projects', (req, res) => {
+    res.end(htmls.projects)
 })
 
 app.get('/cv', (req, res) => {
