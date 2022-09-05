@@ -3,7 +3,7 @@
 }
 
 #about {
-    padding-top: 20vh 0;
+    padding-top: 9vh;
 }
 
 #my-self {
@@ -12,6 +12,10 @@
 
 #projects {
     padding: 10vh 0;
+}
+
+#education {
+    padding: 5vh 0;
 }
 
 a {
