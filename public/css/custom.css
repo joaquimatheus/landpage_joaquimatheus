@@ -1,5 +1,5 @@
 #intro {
-    padding: 10vh 0;
+    padding: 20vh 0;
 }
 
 #about {
@@ -8,6 +8,10 @@
 
 #my-self {
     border-radius: 100%;
+}
+
+#projects {
+    padding: 10vh 0;
 }
 
 a {
