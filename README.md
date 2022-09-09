@@ -1,6 +1,8 @@
 ### This is a Landpage of joaquimatheus.site
 
-![landpage.gif](https://github.com/joaquimatheus/joaquimatheus/blob/main/landpage.gif)
+![index.png](https://github.com/joaquimatheus/landpage_joaquimatheus/blob/feature/redesign_about/misc/index.png)
+![about.png](https://github.com/joaquimatheus/landpage_joaquimatheus/blob/feature/redesign_about/misc/about.png)
+![projects.png](https://github.com/joaquimatheus/landpage_joaquimatheus/blob/feature/redesign_about/misc/projects.png)
 
 Before of start, you need to install these packages for the project
 
